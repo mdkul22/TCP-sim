@@ -2,6 +2,7 @@ __author__ = "VM"
 from .. import tcp_header
 from tcp_header import header
 
+
 class Channel_Handler():
     """enacts the channel between receiver and sender and gives
        congestion properties"""
@@ -62,7 +63,11 @@ class Node():
 
         pass
 
-
+class decision_maker()
+   """ decides if transmitted signal is a success or not """
+  def __init__(self):
+      
+      
 def main():
     node_1 = Node()
     node_2 = Node()
