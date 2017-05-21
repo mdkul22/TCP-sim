@@ -63,9 +63,13 @@ class Node():
 
         pass
 
-class decision_maker()
-   """ decides if transmitted signal is a success or not """
-  def __init__(self):
+class decision_maker()
+
+   """ decides if transmitted signal is a success or not """
+
+  def __init__(self):
+
+
       
       
 def main():
