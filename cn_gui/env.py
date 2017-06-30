@@ -1,7 +1,7 @@
 import random as r
-from math import floor
+import math
 from time import sleep
-
+import numpy as np
 
 class Sender():
 
@@ -12,10 +12,15 @@ class Sender():
 
     def send_packet(self):
 
-        sleep(floor(r.uniform(1, 10)))
-        self.packet = floor(r.uniform(0, 15))
+        sleep(r.uniform(1, 2))
+        self.packet = math.floor(r.uniform(0, 15))
         self.count += 1
-        return self.packet
+        t = np.random.normal(50, 10)
+        print(t)
+        if t > 30 and t < 70:
+        	return self.packet
+        else:
+            return -1
 
     def log_print(self):
 
@@ -30,7 +35,7 @@ class Channel():
 
     def receive_packet(self, sender_packet):
 
-        self.buffer.append(sender_packet)
+       	self.buffer.append(sender_packet)
 
     def send_to_rx(self):
 
@@ -46,11 +51,12 @@ class Receiver():
 
     def rx_packet(self, received):
 
-        self.count += 1
-        self.store.append(received)
+        if received > 0:
+        	self.count += 1
+        	self.store.append(received)
 
     def log_print(self):
-#        print(self.store)
+        print(self.store)
         print(str(self.count) + 'r')
 
 if __name__ == "__main__":
