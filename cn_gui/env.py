@@ -2,6 +2,8 @@ import random as r
 import math
 from time import sleep
 import numpy as np
+from . import header 
+
 
 class Sender():
 
@@ -13,11 +15,11 @@ class Sender():
     def send_packet(self):
 
         sleep(r.uniform(1, 2))
-        self.packet = math.floor(r.uniform(0, 15))
+        self.packet = header.UDPgenerator()
         self.count += 1
-        t = np.random.normal(50, 10)
+        t = np.random.normal(5, 1)
         print(t)
-        if t > 30 and t < 70:
+        if t > 4 and t < 6:
         	return self.packet
         else:
             return -1

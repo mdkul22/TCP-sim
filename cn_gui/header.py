@@ -1,8 +1,18 @@
 from struct import *
 from collections import namedtuple
 import random
+
+def checksum(s):
+   sum = 0
+   for x in s:
+      sum += ord(x)
+    
+   sum = -(sum % 256)
+   
+   return '%2X' % (sum and 0xFF) 
+
 
-class Generator():
+class TCP_Generator():
 
     def __init__(self):
 
@@ -42,9 +52,28 @@ class Generator():
              self.tcp_ack_seq, self.tcp_offset_res, self.tcp_flags, self.tcp_window_size) + pack('H', self.tcp_checksum)
 
 
+
+
+class UDP_generator():
+    """ UDP header gen object """
+
+    def __init__(self, srcport, destport, length, data):
+
+        self.source_port = int(srcport) 
+        self.dest_port = int(destport)
+        self.udp_length = int(length)
+        self.udp_checksum = checksum(srcport) + checksum(destport) + checksum(length)
+        self.data = int(data)
+        self.icheck = 0
+        
+    def packet_gen(self):
+        return pack('bbbbb', self.source_port, self.dest_port, self.udp_length, self.icheck, self.data)    
+
+
 def main():
-    packet = Generator().create_packet()
-    print(packet)
+    packet = UDP_generator("24", "70", "25", "30")
+    p = packet.packet_gen() 
+    print(p)
 
 if __name__ == '__main__':
     main()
